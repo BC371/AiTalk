@@ -13,7 +13,23 @@ def get_ranstr():
     return "".join(s[random.randint(0,15)] for i in range(8))+"-"+"".join(s[random.randint(0,15)] for i in range(4))+"-"+"".join(s[random.randint(0,15)] for i in range(4))+"-"+"".join(s[random.randint(0,15)] for i in range(4))+"-"+"".join(s[random.randint(0,15)] for i in range(12))
 
 def Get_inch_sign(line):
-    return os.popen(f"/home/ubuntu/Downloads/jdk-17.0.2/bin/java CD {line}").read()[:-1]
+    #print(line)
+    d={}
+    list=line.split(' ')
+    for li in list:
+        l=li.find('=')
+        l=l if l!=-1 else len(li)
+        d[li[:l]]=li[l+1:]
+    #print(d)
+
+    temp2 = ''
+    for i in sorted(d.keys()):
+        temp2 += str(i) + "=" + str(d[i]) + "&"
+    temp2 += "aef2890665d884a3080971b4eca594d7"
+    #print(temp2)
+    sign = hashlib.md5(temp2.encode("utf-8")).hexdigest().upper()
+    #print(sign)
+    return sign
 
 stu_dict={"name":["xxxxxxxxxxxxxxxxxxx","xxxxxxxxxxxxxxxxxxx"],
 "id":["xxxxxxxxxxxxxxxxxxx","xxxxxxxxxxxxxxxxxxx4"]}
